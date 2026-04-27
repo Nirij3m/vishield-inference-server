@@ -6,15 +6,11 @@ import pandas as pd
 import os
 import warnings
 
-
-
-
 load_dotenv()
 HF_TOKEN = os.getenv("HF_TOKEN")
 if HF_TOKEN is None:
-    HF_TOKEN = ""
+    HF_TOKEN = None
     warnings.warn("HF_TOKEN not found in environment variables")
-
 
 MAX_LENGTH = 512
 access_token = HF_TOKEN
