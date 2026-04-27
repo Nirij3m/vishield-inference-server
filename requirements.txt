@@ -1,0 +1,10 @@
+fastapi
+torch
+transformers
+pandas
+python-multipart
+uvicorn
+pydantic
+vosk
+ffmpeg-python
+python-dotenv

@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.idea/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+
+# PyTorch & Transformers cache
+.cache/
+transformers_cache/
+
+# Vosk models (downloaded)
+vosk-model-*/
+*.zip
+
+# Dataset files
+*.csv
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
