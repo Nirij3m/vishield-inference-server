@@ -53,6 +53,8 @@ def clean_special_char(text):
 
 def predict_text(text: str):
     text = clean_special_char(text)
+    if text == "":
+        return {"label": "safe", "id": 0, "confidence": 0.99}
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
 
