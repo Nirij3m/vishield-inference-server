@@ -1,10 +1,15 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 import vosk, json, wave, torch, re, ffmpeg, io
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from peft import PeftModel
 from dotenv import load_dotenv
 import pandas as pd
 import os
 import warnings
+import spacy
+import joblib
+from preprocessing import pipeline_clean_transformer
+
 
 load_dotenv()
 HF_TOKEN = os.getenv("HF_TOKEN")
@@ -14,10 +19,24 @@ if HF_TOKEN is None:
 
 MAX_LENGTH = 512
 access_token = HF_TOKEN
-checkpoint = "Nirij3m/roberta-finetuned-vishing"
-model = AutoModelForSequenceClassification.from_pretrained(checkpoint, token=access_token)
-vosk_model = vosk.Model("vosk-model-en-us-0.22")
+base_checkpoint = "roberta-base"
+checkpoint = "Nirij3m/roberta-synth-vishing"
+base_model = AutoModelForSequenceClassification.from_pretrained(base_checkpoint, num_labels=2, token=access_token)
+model = PeftModel.from_pretrained(base_model, checkpoint, token=access_token)
 tokenizer = AutoTokenizer.from_pretrained(checkpoint, token=access_token)
+
+#preprocessor = joblib.load("text_preprocessing.joblib")
+#text = "Hello this is John from Netflix"
+#preprocessed_text = preprocessor.transform([text])
+#print(preprocessed_text)
+
+
+#print(model)
+#print(model.config)
+#model.print_trainable_parameters()
+
+vosk_model = vosk.Model("vosk-model-en-us-0.22")
+
 
 
 def convert_audio(file_bytes: bytes) -> bytes:

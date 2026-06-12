@@ -8,3 +8,7 @@ pydantic
 vosk
 ffmpeg-python
 python-dotenv
+peft
+spacy
+joblib
+scikit-learn
